@@ -24,8 +24,10 @@ html {
 }
 /* width */
 ::-webkit-scrollbar {
-    width: 3px;
+    width: 4px;
 }
+
+
 
 /* Track */
 ::-webkit-scrollbar-track {
@@ -74,26 +76,25 @@ ul {
 }
 
 #searchContainer {
+
+    bottom:10px;
     justify-content: space-around;
     align-items: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
     padding-left: 100%;
     padding-right: 100%;
 }
 
 #searchBar {
+
     text-align: center;
-    width: 150px;
+    width: 404px;
     border-radius: 1px;
-    transition: width 0.2s ease-out;
-    border: 1px solid #dddddd;
+    border: 0px solid #dddddd;
     outline: none;
+    height:25px;
 }
 
-#searchBar:focus {
-    width: 225px;
-}
 
 #exitLink-tearout {
     position: absolute;
@@ -304,6 +305,7 @@ ul {
 
 .app-list-container {
     position: relative;
+    padding-top:5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -318,6 +320,8 @@ ul {
     overflow-y: scroll;
     align-items: baseline;
     align-content: flex-start;
+    padding: 0 5px 0 2px;
+    margin: 0 4px 0 4px;
 }
 
 .app-list > .app-square {

@@ -13,7 +13,7 @@ export interface AppInfo {
 
 interface ConfigFile {
     apps: AppInfo[];
-    config: ConfigInfo;
+    styleConfig: ConfigInfo;
 }
 
 interface ConfigInfo {
@@ -22,9 +22,11 @@ interface ConfigInfo {
     iconBackgroundImage: string;
     systemTrayIcon: string;
     hotbarBackgroundColor: string;
-    trayBackgroundColor: string;
-    trayAppHoverColor: string;
-    trayAppTextColor: string;
+    listBackgroundColor: string;
+    listAppHoverColor: string;
+    listAppTextColor: string;
+    searchBarColor: string;
+    searchBarTextColor: string;
 }
 
 /**
@@ -48,10 +50,17 @@ export class ContentManager {
         ContentManager.INSTANCE = this;
     }
 
+    /**
+     * @method _createEventListeners Creates Event Listeners 
+     */
     private _createEventListeners(): void {
         document.getElementById("searchBar")!.addEventListener("keyup", this._handleSearchInput.bind(this));
     }
 
+    /**
+     * @method _handleSearchInput Handles input from the search bar.  
+     * @param e Keyboard Event
+     */
     private _handleSearchInput(e: KeyboardEvent): void {
         const searchQuery: string = (e.target as HTMLInputElement).value.toLocaleUpperCase();
 
@@ -81,7 +90,7 @@ export class ContentManager {
         fetch(this._configFileUrl)
             .then((response: Response) => response.json())
             .then((configJson: ConfigFile) => {
-                this._processAppConfigs(configJson.config);
+                this._processAppConfigs(configJson.styleConfig);
                 this._processAppList(configJson.apps);
             });
     }
@@ -96,9 +105,11 @@ export class ContentManager {
         const iconBackgroundImage: string = config.iconBackgroundImage || "";
         const systemTrayIcon: string = config.systemTrayIcon || "";
         const hotbarBackgroundColor: string = config.hotbarBackgroundColor || "";
-        const trayBackgroundColor: string = config.trayBackgroundColor || "";
-        const trayAppHoverColor: string = config.trayAppHoverColor || "";
-        const trayAppTextColor: string = config.trayAppTextColor || "";
+        const listBackgroundColor: string = config.listBackgroundColor || "";
+        const listAppHoverColor: string = config.listAppHoverColor || "";
+        const listAppTextColor: string = config.listAppTextColor || "";
+        const searchBarColor: string = config.searchBarColor || "";
+        const searchBarTextColor: string = config.searchBarTextColor || "";
 
         // set Window Title
         document.title = windowTitle;
@@ -107,13 +118,19 @@ export class ContentManager {
         document.getElementsByClassName('launch-bar-handle-img')[0].setAttribute("src", icon);
 
         // set Icon Background Image
-        document.getElementById('launch-bar-handle')!.style.backgroundImage = `url(${iconBackgroundImage})`;
+        document.getElementById('launch-bar-handle')!.style.background = `url(${iconBackgroundImage})`;
 
         // set Tray Background Color
-        document.body.style.backgroundColor = trayBackgroundColor;
+        document.body.style.background = listBackgroundColor;
 
         // set Hotbar Background Color
-        document.getElementById('launch-bar-tearout')!.style.backgroundColor = hotbarBackgroundColor;
+        document.getElementById('launch-bar-tearout')!.style.background = hotbarBackgroundColor;
+
+        //set Search Bar Background Color
+        document.getElementById('searchBar')!.style.background = searchBarColor;
+
+        //set Search Bar Text Color
+        document.getElementById('searchBar')!.style.color = searchBarTextColor;
 
         // set System Tray Icon
         TrayWindowManager.instance.updateTrayIcon(systemTrayIcon);
@@ -126,8 +143,11 @@ export class ContentManager {
             head.appendChild(styleTag);
         }
 
-        writeCSS(`.app-list > .app-square:hover { background-color: ${trayAppHoverColor } }`);
-        writeCSS(`.app-list > .app-square > .app-content > .app-name { color: ${trayAppTextColor} !important; }`);
+        // set List App Hover Color
+        writeCSS(`.app-list > .app-square:hover { background: ${listAppHoverColor } }`);
+
+        // set List App Text Color
+        writeCSS(`.app-list > .app-square > .app-content > .app-name { color: ${listAppTextColor} !important; }`);
     }
 
     /**
@@ -156,7 +176,7 @@ export class ContentManager {
         this._renderAppList(appClassed);
 
         this._trayApps = appClassed;
-        document.getElementsByClassName('app-list')[0].setAttribute("style", `height: ${((Math.ceil(this._trayApps.length / 4) - 1) * 96)}px`);        
+        document.getElementsByClassName('app-list')[0].setAttribute("style", `height: ${((Math.ceil(this._trayApps.length / 4) - 1) * 96 + 10)}px`);        
        
         // Once all apps are loaded, dispatch an event for
         // any compnents that require this to be complete
