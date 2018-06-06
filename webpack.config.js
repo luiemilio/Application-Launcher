@@ -55,5 +55,5 @@ function createWebpackConfigForProject(projectName, entryPoint) {
  * Modules to be exported
  */
 module.exports = [
-    createWebpackConfigForProject('dist/', {'launcher': './src/index.ts'})
+    createWebpackConfigForProject('src/', {'launcher': './src/index.ts'})
 ];
