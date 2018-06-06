@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+	<link href="css/launcher.css" rel="stylesheet">
+	<title>Whiteboard Launcher</title>
+</head>
+
+<body>
+	<img id='exitLink-tearout' onclick="WindowManager.closeWindow()" src="image/shapes/close-x.svg" alt="">
+
+	<div class="launch-bar" id="launch-bar-tearout">
+		<img class="app-list-button-img" onclick="WindowManager.toggleTray()" src="image/shapes/app-list-button.svg" alt="">
+		<div id="launch-bar-handle">
+			<img draggable="false" class="launch-bar-handle-img" src="image/configurables/logo-new.png"/>
+		</div>
+		<div id="launch-bar-drop-zone">
+			<div class="connectedSortable" id="app-hotbar"></div>
+		</div>
+	</div>
+	
+	<div class="app-library-container">
+		<div class="app-trash-can">
+			<img src="image/shapes/delete.svg" class="app-trash-can-img" alt="">
+		</div>
+
+		<div id="app-library-body">
+			<div class="app-list-container">
+				<img class="app-list-reload-img" src="image/shapes/reload.svg" alt="">
+				<div id="searchContainer"><input type="text" id="searchBar" placeholder="Search..." /></div>
+				<div class="app-list connectedSortable"></div>
+			</div>
+			<div class="app-detail-container">
+				<div class="app-detail-body"></div>
+			</div>
+		</div>
+	</div>
+		<script src="dist/launcher-bundle.js"></script>
+</body>
+
+</html>

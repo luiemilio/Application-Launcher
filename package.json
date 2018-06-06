@@ -1,0 +1,43 @@
+{
+  "name": "openfin-template",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@types/dragula": "^2.1.33",
+    "@types/openfin": "^29.0.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "concurrently": "^3.5.1",
+    "copy-dir": "^0.3.0",
+    "css-loader": "^0.28.10",
+    "dragula": "^3.7.2",
+    "express": "^4.16.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.9",
+    "fs-extra": "^5.0.0",
+    "gts": "^0.6.0",
+    "mini-css-extract-plugin": "^0.4.0",
+    "npm": "^5.7.1",
+    "openfin-config-builder": "^1.0.9",
+    "openfin-launcher": "^1.3.12",
+    "openfin-layouts": "0.0.2",
+    "style-loader": "^0.20.2",
+    "ts-loader": "^4.3.1",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.1",
+    "url-loader": "^0.6.2",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13"
+  },
+  "dependencies": {
+    "rsyncwrapper": "^2.0.1"
+  },
+  "scripts": {
+    "build": "webpack && node build.js",
+    "webpack": "webpack --watch",
+    "lint": "gts check",
+    "start": "concurrently --kill-others \"webpack --mode development --watch\" \"sleep 5 && node server.js\"",
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "fix": "gts fix"
+  }
+}

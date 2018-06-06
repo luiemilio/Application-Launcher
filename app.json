@@ -1,0 +1,24 @@
+{ 
+    "startup_app": {
+        "name": "Launcher",
+        "description": "Openfin Application Launcher",
+        "url": "http://localhost:9001/index.html",
+        "defaultWidth": 408,
+        "defaultHeight": 67,
+        "defaultCentered":true,
+        "autoShow": true,
+        "uuid": "Launcher_Main",
+        "saveWindowState": false,
+        "resizable":false,
+        "shadow": true,
+        "frame": false,
+        "backgroundColor": "#1C1C31",
+        "alwaysOnTop":true,
+        "icon": "http://localhost:9001/image/logo-new.ico",
+        "applicationIcon": "http://localhost:9001/image/logo-new.ico"
+    },
+    "runtime": {
+        "arguments": "--winhttp-proxy-resolver --remote-debugging-port=9090 --noerrdialogs --v=1 --disable-web-security",
+        "version": "8.56.30.55"
+    }
+}
