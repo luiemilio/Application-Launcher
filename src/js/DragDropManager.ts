@@ -1,16 +1,28 @@
 
 import dragula from 'dragula';
 
+const MAX_CHILD_COUNT = 5;
+
+
 export class DragDropManager {
 
     public static instance: DragDropManager;
+
+    private _maxChildren:number;
+
+    private _hotBarChildCount:number;
 
     private _appHotBar = document.querySelector('#app-hotbar') as Element;
     private _appList = document.querySelector('.app-list') as Element;
 
     private _drake: dragula.Drake;
 
-    constructor() {
+    constructor(maxChildren:number = MAX_CHILD_COUNT ) {
+        this._maxChildren = maxChildren;
+        // Initialize _childCount to the max allowed., preventing apps
+        // from being added to the hot bar. This will be set correctly once  
+        // the content is fully loaded.
+        this._hotBarChildCount = this._maxChildren;
         this._drake = this._initializeDragula();
         this._registerListeners(this._drake);
     }
@@ -41,8 +53,10 @@ export class DragDropManager {
                 }
 
                 // Otherwise (moving from list to hotbar) there must be fewer
-                // than 5 existing children
-                return Number(this._appHotBar.getAttribute('childCount')) < 5;
+                // than _maxChildren existing children
+                console.log(`Current children: ${this._hotBarChildCount}; Max children: ${this._maxChildren}`);
+                
+                return this._hotBarChildCount < MAX_CHILD_COUNT;
 
             },
             // If the object is dropped where there is no valid 
@@ -57,14 +71,18 @@ export class DragDropManager {
         // Increment the child counter when an app is added to the top bar
         drake.on('drop', (el: Element, target: Element, source: Element, sibling: Element) => {
             if (target === this._appHotBar && source === this._appList) {
-                incrementHotbarChildCount(target);
+                this._hotBarChildCount ++;
+                console.log('Child count initialized to : ' + this._hotBarChildCount);
+                
             }
         });
 
         // Decrement the child counter when an app is removed from the top bar
         drake.on('remove', (el: Element, source: Element) => {
             if (source === this._appHotBar) {
-                decrementHotbarChildCount(source);
+                this._hotBarChildCount --;
+                console.log('Child count decremented to : ' + this._hotBarChildCount);
+                
             }
         });
 
@@ -76,33 +94,12 @@ export class DragDropManager {
         });
     }
 
+    public initChildCount() {
+          this._hotBarChildCount = document.getElementById("app-hotbar")!.childNodes.length;
+          console.log('Child count initialized to : ' + this._hotBarChildCount);
+          
+    }
+    
 }
 
-function getHotbarChildCount(appHotBar: Element): number {
-    return Number(appHotBar.getAttribute('childCount'));
-}
-
-function incrementHotbarChildCount(target: Element): void {
-    target.setAttribute('childCount',
-        (getHotbarChildCount(target) + (1)).toString()
-    );
-    console.log(`Incremeneting childCount. Value now ${target.getAttribute('childCount')}`);
-
-}
-
-function decrementHotbarChildCount(source: Element): void {
-    source.setAttribute('childCount',
-        (getHotbarChildCount(source) - 1).toString()
-    );
-    console.log(`Decrementing childCount. Value now ${source.getAttribute('childCount')}`);
-
-}
-
-function setChildCount() {
-    // Set a custom attribute against the hotbar that will be used to track whether
-    // apps can be dragged into it
-    document.getElementById("app-hotbar")!
-        .setAttribute('childCount',
-            document.getElementById("app-hotbar")!.childNodes.length.toString());
-}
 

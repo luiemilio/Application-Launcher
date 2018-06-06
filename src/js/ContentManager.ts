@@ -35,6 +35,8 @@ export class ContentManager {
     private _trayApps: App[] = [];
     private static INSTANCE: ContentManager;
 
+    private _dragDropManager: DragDropManager = new DragDropManager();
+
     constructor() {
         if(ContentManager.INSTANCE) {
             return ContentManager.INSTANCE;
@@ -155,7 +157,10 @@ export class ContentManager {
 
         this._trayApps = appClassed;
         document.getElementsByClassName('app-list')[0].setAttribute("style", `height: ${((Math.ceil(this._trayApps.length / 4) - 1) * 96)}px`);        
-        
+       
+        // Once all apps are loaded, dispatch an event for
+        // any compnents that require this to be complete
+        this._dragDropManager.initChildCount();         
     }
 
     /**
