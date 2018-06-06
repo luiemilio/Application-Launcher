@@ -1,13 +1,13 @@
 {
     "config": {
-        "windowTitle": "Whiteboard Launcher",
-        "icon": "https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/bird.png",
-        "iconBackgroundImage": "https://4.bp.blogspot.com/-06IPFRCgmH0/VDuFtXJZZNI/AAAAAAAAGjw/K1ew83hDI_c/s1600/seamless-wood-pattern.jpg",
+        "windowTitle": "Application Launcher",
+        "icon": "image/configurables/logo-new.png",
+        "iconBackgroundImage": "image/configurables/gradient.svg",
         "systemTrayIcon": "image/configurables/logo-new.ico",
-        "hotbarBackgroundColor": "blue",
-        "trayBackgroundColor": "red",
-        "trayAppHoverColor": "green",
-        "trayAppTextColor": "cyan"
+        "hotbarBackgroundColor": "#1F1E24",
+        "trayBackgroundColor": "#1F1E24",
+        "trayAppHoverColor": "#484c6c",
+        "trayAppTextColor": "#FFFFFF"
     },
     "apps": [
         {
