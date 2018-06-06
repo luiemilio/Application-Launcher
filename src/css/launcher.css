@@ -22,14 +22,27 @@
 html {
     overflow: hidden;
 }
+/* width */
 ::-webkit-scrollbar {
-    width: 0px; /* remove scrollbar space */
-    background: transparent; /* optional: just make scrollbar invisible */
+    width: 3px;
 }
-/* optional: show position indicator in red */
+
+/* Track */
+::-webkit-scrollbar-track {
+    display:none; 
+}
+ 
+/* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #ff0000;
+    background: #888; 
+    border-radius: 4px;
 }
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
 
 body {
     position: relative;
