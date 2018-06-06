@@ -7,7 +7,7 @@ export class TrayWindowManager {
     private static INSTANCE: TrayWindowManager;
 
     private _window!: fin.OpenFinWindow;
-    private _icon: string = 'image/configurables/logo-new.png';
+    private _icon!: string;
 
     constructor(){
         if(TrayWindowManager.INSTANCE) {
@@ -15,7 +15,6 @@ export class TrayWindowManager {
         }
 
         this._createTrayWindow();
-        this._createTrayIcon();
 
         TrayWindowManager.INSTANCE = this;
     }
@@ -41,7 +40,6 @@ export class TrayWindowManager {
             'state': 'normal',
         }, () => {
             openfinLayouts.deregister({ uuid: fin.desktop.Application.getCurrent().uuid, name: 'LauncherTray' });
-            this._window.addEventListener('blurred', () => { this._window.blur(); });
         }, (e: string) => {
             console.error('Failed to create LauncherTrayIcon Window', e);
             this._window = fin.desktop.Window.wrap(fin.desktop.Application.getCurrent().uuid, 'LauncherTray');
