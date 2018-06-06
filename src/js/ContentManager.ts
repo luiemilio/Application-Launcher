@@ -69,7 +69,7 @@ export class ContentManager {
 
         //if no search then render original list and escape.
         if(searchQuery.length === 0) {
-            this._renderAppList(this._trayApps, false);
+            this._renderAppList(this._trayApps, false, true);
             return;
         }
 
@@ -228,21 +228,35 @@ export class ContentManager {
          // Trusting .app-list is not null
          const trayElement: HTMLElement = document.getElementsByClassName("app-list")![0] as HTMLElement;
 
+         // Trusting #app-hotbar is not null
+         const hotBar: HTMLElement = document.getElementById("app-hotbar")!;
+         let rememberedHotApps: Array<{name: string}>;
+
          if(clearExistingIcons){
              trayElement.innerHTML = "";
+         }
+
+         if(renderHotBar) {
+            rememberedHotApps = JSON.parse(localStorage.getItem('HotApps') as string) || [];
          }
          
         // Render each applications HTML
         apps.forEach((app: App, index: number) => {
-           // 5 Items in the launcher bar
-           if( index < 5 && renderHotBar) {
-               // Trusting #app-hotbar is not null
-               const topBar: HTMLElement = document.getElementById("app-hotbar")!;
+            // 5 Items in the launcher bar
+            if( ((index < 5 && rememberedHotApps.length === 0) || rememberedHotApps.length > 0) && renderHotBar && hotBar) {
+                
+                if (rememberedHotApps.length > 0) {
+                    const found: number = rememberedHotApps.findIndex((rememberedApp: {name: string}) => {
+                        return app.info.name === rememberedApp.name;
+                    });
 
-               if(topBar){
-                   this._renderTo(topBar, app.render());
-               }
-           }
+                    if(found > -1) {
+                        this._renderTo(hotBar, app.render());
+                    }
+                } else {
+                    this._renderTo(hotBar, app.render());
+                }
+            }
 
            if(trayElement) {
                this._renderTo(trayElement, app.render());
