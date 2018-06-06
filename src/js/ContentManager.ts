@@ -12,8 +12,9 @@ export interface AppInfo {
 }
 
 interface ConfigFile {
-    apps: AppInfo[];
-    styleConfig: ConfigInfo;
+    apps?: AppInfo[];
+    styleConfig?: ConfigInfo;
+    remoteManifests?: string[];
 }
 
 interface ConfigInfo {
@@ -33,9 +34,10 @@ interface ConfigInfo {
  * @method ContentManager A manager to handle content additions to the DOM
  */
 export class ContentManager {
-    private _configFileUrl: string = './config/application-manifest.json';
+    private _localConfigFileUrl: string = './config/application-manifest.json';
     private _trayApps: App[] = [];
     private static INSTANCE: ContentManager;
+    private _hasRenderedOnce: boolean = false;
 
     private _dragDropManager: DragDropManager = new DragDropManager();
 
@@ -44,7 +46,8 @@ export class ContentManager {
             return ContentManager.INSTANCE;
         }
 
-        this._loadConfigurationFile();
+        this._loadConfigFileAndProcess(this._localConfigFileUrl);
+
         this._createEventListeners();
 
         ContentManager.INSTANCE = this;
@@ -80,19 +83,39 @@ export class ContentManager {
             return false;
         });
 
-        this._renderAppList(searchedApps, false);
+        this._renderAppList(searchedApps, false, true);
     }
 
     /**
      * @method _loadConfigurationFile Loads in the Configuration File and initates processing
      */
-    private _loadConfigurationFile(): void {
-        fetch(this._configFileUrl)
-            .then((response: Response) => response.json())
-            .then((configJson: ConfigFile) => {
-                this._processAppConfigs(configJson.styleConfig);
-                this._processAppList(configJson.apps);
-            });
+    private async _loadConfigurationFile(fileUrl: string): Promise<ConfigFile> {
+        return await fetch(fileUrl)
+            .then((response: Response) => response.json());
+    }
+
+    /**
+     * 
+     * @param fileUrl Url of Manifest
+     * @param recursive If we are in a recursive loop then we should not load in app setting configs.
+     */
+    private _loadConfigFileAndProcess(fileUrl: string, recursive: boolean = false): void {
+        this._loadConfigurationFile(fileUrl)
+        .then((config: ConfigFile) => {
+            if(!recursive && config.styleConfig){
+                 this._processAppConfigs(config.styleConfig);
+            }
+           
+            if(config.apps) {
+                this._processAppList(config.apps);
+            }
+
+            if(config.remoteManifests){
+                config.remoteManifests.forEach((manifest: string) => {
+                    this._loadConfigFileAndProcess(manifest, true);
+                });
+            }
+        });
     }
 
     /**
@@ -135,6 +158,10 @@ export class ContentManager {
         // set System Tray Icon
         TrayWindowManager.instance.updateTrayIcon(systemTrayIcon);
 
+        /**
+         * @method writeCSS Writes a raw CSS string into a style tag.
+         * @param style CSS Style String
+         */
         function writeCSS(style: string): void {
             const head: HTMLElement = document.head;
             const styleTag: HTMLElement = document.createElement('style');
@@ -173,10 +200,19 @@ export class ContentManager {
             return new App(app);
         });
 
-        this._renderAppList(appClassed);
+        if(this._hasRenderedOnce){
+            this._renderAppList(appClassed, false);
+        } else {
+            this._renderAppList(appClassed);
+            this._hasRenderedOnce = true;
+        }
+       
+        this._trayApps = this._trayApps.concat(appClassed);
 
-        this._trayApps = appClassed;
-        document.getElementsByClassName('app-list')[0].setAttribute("style", `height: ${((Math.ceil(this._trayApps.length / 4) - 1) * 96 + 10)}px`);        
+        // Sets the App list to height relative to number of icons.
+
+        const rowCount: number = (Math.ceil(this._trayApps.length / 4) - 1);
+        document.getElementsByClassName('app-list')[0].setAttribute("style", `height: ${((rowCount > 4 ? 4 : rowCount) * 96 + 10)}px`);        
        
         // Once all apps are loaded, dispatch an event for
         // any compnents that require this to be complete
@@ -188,11 +224,14 @@ export class ContentManager {
      * @param apps Array of Applications
      * @param renderHotBar Boolean if we should consider the top bar items or render only to the tray.
      */
-    private _renderAppList(apps: App[], renderHotBar: boolean = true): void {
+    private _renderAppList(apps: App[], renderHotBar: boolean = true, clearExistingIcons: boolean = false): void {
          // Trusting .app-list is not null
          const trayElement: HTMLElement = document.getElementsByClassName("app-list")![0] as HTMLElement;
-         trayElement.innerHTML = "";
 
+         if(clearExistingIcons){
+             trayElement.innerHTML = "";
+         }
+         
         // Render each applications HTML
         apps.forEach((app: App, index: number) => {
            // 5 Items in the launcher bar
