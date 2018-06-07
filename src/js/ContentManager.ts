@@ -2,21 +2,19 @@ import { App } from './App';
 import { DragDropManager } from './DragDropManager';
 import { TrayWindowManager } from './TrayWindowManager';
 
-
 export interface AppInfo {
     name: string;
     title: string;
-    manifest_url: string;
+    manifest: string;
     icon: string;
-    images: Array<{url: string}>;
-    description: string;
     hidden?: boolean;
     startup?: boolean;
 }
 
 interface ConfigFile {
-    style?: ConfigInfo;
-    applicationManifests?: string[];
+    apps?: AppInfo[];
+    styleConfig?: ConfigInfo;
+    remoteManifests?: string[];
 }
 
 interface ConfigInfo {
@@ -36,20 +34,19 @@ interface ConfigInfo {
  * @method ContentManager A manager to handle content additions to the DOM
  */
 export class ContentManager {
-    private static INSTANCE: ContentManager;
-    
-    private _localSettingsFileUrl: string = './config/settings.json';
+    private _localConfigFileUrl: string = './config/application-manifest.json';
     private _trayApps: App[] = [];
+    private static INSTANCE: ContentManager;
     private _hasRenderedOnce: boolean = false;
 
     private _dragDropManager: DragDropManager = new DragDropManager();
 
     constructor() {
-        if (ContentManager.INSTANCE) {
+        if(ContentManager.INSTANCE) {
             return ContentManager.INSTANCE;
         }
 
-        this._loadConfigFileAndProcess(this._localSettingsFileUrl);
+        this._loadConfigFileAndProcess(this._localConfigFileUrl);
 
         this._createEventListeners();
 
@@ -71,14 +68,14 @@ export class ContentManager {
         const searchQuery: string = (e.target as HTMLInputElement).value.toLocaleUpperCase();
 
         //if no search then render original list and escape.
-        if (searchQuery.length === 0) {
+        if(searchQuery.length === 0) {
             this._renderAppList(this._trayApps, true);
             return;
         }
 
         const searchedApps: App[] = this._trayApps.filter((app: App) => {
-            if (!app.info.hidden) {
-                if (app.info.title.toLocaleUpperCase().includes(searchQuery)) {
+            if(!app.info.hidden){
+                if(app.info.title.toLocaleUpperCase().includes(searchQuery)) {
                     return true;
                 }
             }
@@ -91,39 +88,31 @@ export class ContentManager {
 
     /**
      * @method _loadConfigurationFile Loads in the Configuration File and initates processing
-     * @param fileUrl Url of Manifest
      */
-    // tslint:disable-next-line:no-any
-    private async _loadConfigurationFile(fileUrl: string): Promise<any> {
+    private async _loadConfigurationFile(fileUrl: string): Promise<ConfigFile> {
         return await fetch(fileUrl)
             .then((response: Response) => response.json());
     }
 
     /**
-     * @method _loadAppManifestAndProcess Loads Application Manifest and Processes
+     * 
      * @param fileUrl Url of Manifest
+     * @param recursive If we are in a recursive loop then we should not load in app setting configs.
      */
-    private _loadAppManifestAndProcess(fileUrl: string){
-        this._loadConfigurationFile(fileUrl)
-        .then((appManifest: AppInfo[]) => {
-            this._processAppList(appManifest);
-        });
-    }
-
-    /**
-     * @method _loadConfigFileAndProcess Loads Application Settings and Processes
-     * @param fileUrl Url of Manifest
-     */
-    private _loadConfigFileAndProcess(fileUrl: string): void {
+    private _loadConfigFileAndProcess(fileUrl: string, recursive: boolean = false): void {
         this._loadConfigurationFile(fileUrl)
         .then((config: ConfigFile) => {
-            if(config.style){
-                 this._processAppConfigs(config.style);
+            if(!recursive && config.styleConfig){
+                 this._processAppConfigs(config.styleConfig);
             }
            
-            if(config.applicationManifests){
-                config.applicationManifests.forEach((manifest: string) => {
-                    this._loadAppManifestAndProcess(manifest);
+            if(config.apps) {
+                this._processAppList(config.apps);
+            }
+
+            if(config.remoteManifests){
+                config.remoteManifests.forEach((manifest: string) => {
+                    this._loadConfigFileAndProcess(manifest, true);
                 });
             }
         });
@@ -182,7 +171,7 @@ export class ContentManager {
         }
 
         // set List App Hover Color
-        writeCSS(`.app-list > .app-square:hover { background: ${listAppHoverColor} }`);
+        writeCSS(`.app-list > .app-square:hover { background: ${listAppHoverColor } }`);
 
         // set List App Text Color
         writeCSS(`.app-list > .app-square > .app-content > .app-name { color: ${listAppTextColor} !important; }`);
@@ -196,8 +185,7 @@ export class ContentManager {
         // Filter out hidden apps & start apps with startup flag
         const appsFiltered: AppInfo[] = apps.filter((app: AppInfo) => {
             if(app.startup) {
-                ContentManager.createFromManifestAndRun(app.manifest_url);
-
+                ContentManager.createFromManifestAndRun(app.manifest);
             }
 
             if (app.hidden) {
@@ -212,24 +200,24 @@ export class ContentManager {
             return new App(app);
         });
 
-        if (this._hasRenderedOnce) {
+        if(this._hasRenderedOnce){
             this._renderAppList(appClassed);
         } else {
             this._renderHotBar(appClassed);
             this._renderAppList(appClassed);
             this._hasRenderedOnce = true;
         }
-
+       
         this._trayApps = this._trayApps.concat(appClassed);
 
         // Sets the App list to height relative to number of icons.
 
         const rowCount: number = (Math.ceil(this._trayApps.length / 4) - 1);
-        document.getElementsByClassName('app-list')[0].setAttribute("style", `height: ${((rowCount > 4 ? 4 : rowCount) * 96 + 10)}px`);
-
+        document.getElementsByClassName('app-list')[0].setAttribute("style", `height: ${((rowCount > 4 ? 4 : rowCount) * 96 + 10)}px`);        
+       
         // Once all apps are loaded, dispatch an event for
         // any compnents that require this to be complete
-        this._dragDropManager.initChildCount();
+        this._dragDropManager.initChildCount();         
     }
 
     /**
@@ -242,28 +230,28 @@ export class ContentManager {
         const hotBar: HTMLElement = document.getElementById("app-hotbar")!;
 
         // Gets any apps on the HotBar from previous application uses.
-        const rememberedHotApps: Array<{ name: string }> = JSON.parse(localStorage.getItem('HotApps') as string) || [];
+        const rememberedHotApps: Array<{name: string}> = JSON.parse(localStorage.getItem('HotApps') as string) || [];
 
-        if (hotBar) {
+        if(hotBar) {
 
             // Render each applications HTML
             apps.forEach((app: App, index: number) => {
 
                 // Loads first 5 apps in list if there are no rememeberedApps, or loads the rememeberedApps.
-                if (((index < 5 && rememberedHotApps.length === 0) || rememberedHotApps.length > 0)) {
-
+                if( ((index < 5 && rememberedHotApps.length === 0) || rememberedHotApps.length > 0) ) {
+                    
                     // Pluck out and renders the remembered apps
                     if (rememberedHotApps.length > 0) {
-                        const found: number = rememberedHotApps.findIndex((rememberedApp: { name: string }) => {
+                        const found: number = rememberedHotApps.findIndex((rememberedApp: {name: string}) => {
                             return app.info.name === rememberedApp.name;
                         });
 
-                        if (found > -1) {
-                            this._renderTo(hotBar, app.render(true));
+                        if(found > -1) {
+                            this._renderTo(hotBar, app.render());
                         }
                     } else {
                         // No rememberedApps
-                        this._renderTo(hotBar, app.render(true));
+                        this._renderTo(hotBar, app.render());
                     }
                 }
             });
@@ -279,11 +267,11 @@ export class ContentManager {
         // Trusting .app-list is not null
         const trayElement: HTMLElement = document.getElementsByClassName("app-list")![0] as HTMLElement;
 
-        if (clearExistingIcons) {
+        if(clearExistingIcons){
             trayElement.innerHTML = "";
         }
 
-        if (trayElement) {
+        if(trayElement) {
             apps.forEach((app: App, index: number) => {
                 this._renderTo(trayElement, app.render());
             });
@@ -326,7 +314,7 @@ export class ContentManager {
      * @returns ContentManager
      */
     public static get instance(): ContentManager {
-        if (ContentManager.INSTANCE) {
+        if(ContentManager.INSTANCE){
             return ContentManager.INSTANCE;
         } else {
             return new ContentManager();

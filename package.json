@@ -28,10 +28,7 @@
     "webpack-cli": "^2.0.13"
   },
   "dependencies": {
-    "popper.js": "^1.14.3",
-    "rsyncwrapper": "^2.0.1",
-    "tippy.js": "^2.5.2",
-    "tooltip.js": "^1.2.0"
+    "rsyncwrapper": "^2.0.1"
   },
   "scripts": {
     "build": "node build.js && webpack",

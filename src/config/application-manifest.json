@@ -1,138 +1,173 @@
-[
-  {
-    "name": "Tradeblotter",
-    "title": "Tradeblotter",
-    "manifest_url": "https://cdn.openfin.co/demos/whiteboard/apps/internal/tradeblotter/app.json",
-    "description": "The Tradeblotter is a feature rich application built on top of the Ag-grid library.  This application contains interoperability to many of the other applications included in this demo, including Symphony and the Notification Center.",
-    "icon": "image/shapes/blot.svg",
-    "images": [{"url": "image/screenshots/trade-blotter.png"}]
-  },
-  {
-    "name": "Symphony",
-    "title": "Symphony",
-    "manifest_url": "https://cdn.openfin.co/demos/whiteboard/apps/external/symphony/app.json",
-    "description": "OpenFin has created an open-source project that allows anyone to run the Symphony chat client on OpenFin. This moves the client into a secure, interoperable and deployable format that can be more conducive for enterprises that already leverage OpenFin for their own applications.",
-    "icon": "image/shapes/symphony.svg",
-    "images":  [{"url": "image/screenshots/symphony.png"}]
-  },
-  {
-    "name": "Legacy App",
-    "title": "Legacy App",
-    "manifest_url": "https://cdn.openfin.co/demos/whiteboard/apps/internal/legacyapp/app.json",
-    "description": "The legacy app is a simple demo .Net app demonstrating language interop with Openfin. The app mimics a simplified Compliance Risk monitoring app.",
-    "icon": "image/shapes/Latin_N.svg",
-    "images":  [{"url": "image/screenshots/legacy-app.png"}]
-  },
-  {
-    "name": "Replay",
-    "title": "Replay",
-    "manifest_url": "https://cdn.openfin.co/demos/whiteboard/apps/internal/replay/app.json",
-    "description": "The replay app is a demo application which allows for quick, on the fly functionality testing of various features.",
-    "icon": "image/shapes/replay.svg",
-    "images":  [{"url": "image/screenshots/replay.png"}]
-  },
-  {
-    "name": "ChartIQ",
-    "title": "ChartIQ",
-    "manifest_url": "https://cdn.openfin.co/demos/whiteboard/apps/external/chart-iq/app.json",
-    "description": "ChartIQ is the first and only professional grade HTML5 charting library solution that works seamlessly across desktop, web, tablet, and smartphone. More than just another charting tool, ChartIQ is a developer-friendly financial visualization engine built using a highly robust and proprietary API and delivered as a simple SDK file. ChartIQ offers a wide range of innovative data visualizations for time series charting that intuitively puts social, fundamental, and macro data in the context of charts across any asset class with any market data feed.",
-    "icon": "image/shapes/mark_white.svg",
-    "images":  [{"url": "image/screenshots/chart-iq.png"}]
-  },
-  {
-    "name": "Salesforce",
-    "title": "Salesforce",
-    "manifest_url": "https://cdn.openfin.co/demos/salesforce/app.json",
-    "description": "Salesforce",
-    "icon": "image/shapes/salesforce.svg",
-    "images":  [{"url": "image/screenshots/template-app.png"}]
-  },
-  {
-    "name": "Adaptable",
-    "title": "Adaptable",
-    "manifest_url": "http://beta.adaptableblotter.com/app-beta.json",
-    "description": "The Adaptable Blotter is the fastest fully-featured HTML5 grid available on the market. It ships, out of the box, with all the powerful, advanced functionality that financial users need. It is suitable for any type of grid, can be populated with any data, and used anywhere in any organisation. AdaptableBlotter.JS integrates with the leading HTML5 grid controls providing a single set of screens and functionality regardless of the underlying grid. In this demo AdaptableBlotter.JS sits on top of OpenFin’s super-fast canvas based Hypergrid – a particularly powerful combination.",
-    "icon": "image/shapes/adaptable-blotter-logo.png",
-    "images":  [{"url": "image/screenshots/adaptable.png"}]
-  },
-  {
-    "name": "Pipeline-Deals",
-    "title": "Pipeline Deals",
-    "manifest_url": "https://cdn.openfin.co/demos/whiteboard/apps/internal/pipeline/app.json",
-    "description": "Customer relationship management and sales CRM software to organize, track, and manage your deals, leads, and contacts. Great for sales teams of all sizes.",
-    "icon": "https://d33wubrfki0l68.cloudfront.net/29601600ed621a6d34af5c049a8c51f8c4bf9030/2002f/images/sales-tools-logos/logo-36-pipelinedeals.png",
-    "images":  [{"url": "https://help.pipelinedeals.com/hc/en-us/article_attachments/202278837/Deals___PipelineDeals.png"}]
-  },
-  {
-    "name": "Reactive Trader",
-    "title": "Reactive Trader",
-    "manifest_url": "https://raw.githubusercontent.com/AdaptiveConsulting/ReactiveTraderCloud/master/src/client/config/openfin/demo.app.json",
-    "description": "Adaptive has developed Reactive Trader, a simulated trading application for FX markets. Pop out FX currency pair tiles from the main window and move it to a location where it remains on top of your monitor in front of other apps. Click on a Buy/Sell stack to execute a trade and generate a toaster notification with the transaction details. Reactive Trader also integrates with Excel.",
-    "icon": "https://web-demo.adaptivecluster.com/images/icon.ico",
-    "images":  [{"url": "image/screenshots/reactive-trader.png"}]
-  },
-  {
-    "name": "StockFlux",
-    "title": "StockFlux",
-    "manifest_url": "http://scottlogic.github.io/StockFlux/master/app.json",
-    "description": "The StockFlux OpenFin demo, by Scott Logic, is an application that allows you to explore the price and performance of various stocks via a novel desktop interface. You can open multiple windows by dragging tiles outside of the favourites pane, re-dock by dragging them back in, ‘collapse’ a window to create a compact tile view and re-open recently closed windows in their original state.",
-    "icon": "http://scottlogic.github.io/StockFlux/master/favicon.ico",
-    "images":  [{"url": "image/screenshots/stock-flux.jpg"}]
-  },
-  {
-    "name": "Hyperblotter",
-    "title": "Hyperblotter",
-    "manifest_url": "http://cdn.openfin.co/demos/hyperblotter/app.json",
-    "description": "The Hyperblotter demonstrates OpenFin’s ability to manage native window events in an HTML5 world and Excel integration. The application allows users to create multiple windows, animate those windows, launch a Hypergrid blotter and port data into Excel by highlighting the table.",
-    "icon": "image/shapes/hyperblotter_icon.ico",
-    "images":  [{"url": "image/screenshots/hyperblotter.png"}]
-  },
-  {
-    "name": "Lithos",
-    "title": "Lithos",
-    "manifest_url": "https://projects.28stone.com/lvm-client/app.json",
-    "description": "28Stone's Lithos Volume Matchings is a fixed price, session based matching platform with the ability to simultaneously process multiple matching sessions initiated by a variety of Brokers. The platform enables order entry either directly through the session specific UI or via a client side integrated Excel spreadsheet. Utilizing OpenFin’s API the Lithos’s windows are dockable to provide a single window.",
-    "icon": "image/shapes/28stone.png",
-    "images":  [{"url": "image/screenshots/lithos.png"}]
-  },
-  {
-    "name": "My Symphony",
-    "title": "My Symphony",
-    "manifest_url": "https://symphony.openfin.co/app?startup_app.url=https://my.symphony.com",
-    "description": "OpenFin has created an open-source project that allows anyone to run the Symphony chat client on OpenFin. This moves the client into a secure, interoperable and deployable format that can be more conducive for enterprises that already leverage OpenFin for their own applications.",
-    "icon": "image/shapes/symphony.svg",
-    "images":  [{"url": "image/screenshots/symphony.png"}]
-  },
-  {
-    "name": "Beacon",
-    "title": "Beacon",
-    "manifest_url": "http://perpetualnyc.com/beacon/app.json",
-    "description": "Beacon, by Perpetual, is a scrolling news application built on OpenFin. Beacon provides live updating news from 50 different news sources including CNBC, Reuters and The New York Times. You can search for keywords across thousands of news articles, select news sources and bookmark specific articles, giving you immediate and convenient access to financial news directly on your desktop.",
-    "icon": "http://perpetualnyc.com/beacon/beacon_icon.ico",
-    "images":  [{"url": "image/screenshots/beacon.png"}]
-  },
-  {
-    "name": "Web Portal",
-    "title": "Web Portal",
-    "manifest_url": "https://cdn.openfin.co/demos/whiteboard/apps/internal/web-portal/app.json",
-    "description": "",
-    "icon": "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/Global_Business-512.png",
-    "images":  [{"url": "image/screenshots/beacon.png"}]
-  },
-  {
-    "name": "RSRCXChange",
-    "title": "RSRCXChange",
-    "manifest_url": "https://www.rsrchx.com/api/openfin/1/rex.main.app.json",
-    "description": "",
-    "icon": "https://www.rsrchx.com/static/openfin/rex.app.ico",
-    "images": [{"url": ""}]
-  },
-  {
-    "name": "FDC3 Explorer",
-    "title": "FDC3 Explorer",
-    "manifest_url": "https://cdn.openfin.co/demos/whiteboard/apps/external/fdc3explorer/explorer/app.json",
-    "description": "",
-    "icon": "https://cdn.openfin.co/demos/whiteboard/apps/external/fdc3explorer/shared/fdc3fav.png",
-    "images":  [{"url": ""}]
-  }
-]
+{
+
+    "styleConfig": {
+        "windowTitle": "Application Launcher",
+        "icon": "image/configurables/logo-new.png",
+        "iconBackgroundImage": "image/configurables/gradient.svg",
+        "systemTrayIcon": "image/configurables/logo-new.ico",
+        "hotbarBackgroundColor": "#1F1E24",
+        "listBackgroundColor": "#1F1E24",
+        "listAppHoverColor": "#484c6c",
+        "listAppTextColor": "#FFFFFF",
+        "searchBarColor": "rgba(255, 255, 255, 0.15)",
+        "searchBarTextColor": "lightgrey"
+    },
+    "remoteManifests": [],
+    "apps": [
+        {
+            "name": "Tradeblotter",
+            "title": "Tradeblotter",
+            "manifest": "https://cdn.openfin.co/demos/whiteboard/apps/internal/tradeblotter/app.json",
+            "description":
+                "The Tradeblotter is a feature rich application built on top of the Ag-grid library.  This application contains interoperability to many of the other applications included in this demo, including Symphony and the Notification Center.",
+            "icon": "image/shapes/blot.svg",
+            "image": "image/screenshots/trade-blotter.png"
+        },
+        {
+            "name": "Symphony",
+            "title": "Symphony",
+            "manifest": "https://cdn.openfin.co/demos/whiteboard/apps/external/symphony/app.json",
+            "description":
+                "OpenFin has created an open-source project that allows anyone to run the Symphony chat client on OpenFin. This moves the client into a secure, interoperable and deployable format that can be more conducive for enterprises that already leverage OpenFin for their own applications.",
+            "icon": "image/shapes/symphony.svg",
+            "image": "image/screenshots/symphony.png"
+        },
+        {
+            "name": "Legacy App",
+            "title": "Legacy App",
+            "manifest": "https://cdn.openfin.co/demos/whiteboard/apps/internal/legacyapp/app.json",
+            "description":
+                "The legacy app is a simple demo .Net app demonstrating language interop with Openfin. The app mimics a simplified Compliance Risk monitoring app.",
+            "icon": "image/shapes/Latin_N.svg",
+            "image": "image/screenshots/legacy-app.png"
+        },
+        {
+            "name": "Replay",
+            "title": "Replay",
+            "manifest": "https://cdn.openfin.co/demos/whiteboard/apps/internal/replay/app.json",
+            "description":
+                "The replay app is a demo application which allows for quick, on the fly functionality testing of various features.",
+            "icon": "image/shapes/replay.svg",
+            "image": "image/screenshots/replay.png"
+        },
+        {
+            "name": "ChartIQ",
+            "title": "ChartIQ",
+            "manifest": "https://cdn.openfin.co/demos/whiteboard/apps/external/chart-iq/app.json",
+            "description":
+                "ChartIQ is the first and only professional grade HTML5 charting library solution that works seamlessly across desktop, web, tablet, and smartphone. More than just another charting tool, ChartIQ is a developer-friendly financial visualization engine built using a highly robust and proprietary API and delivered as a simple SDK file. ChartIQ offers a wide range of innovative data visualizations for time series charting that intuitively puts social, fundamental, and macro data in the context of charts across any asset class with any market data feed.",
+            "icon": "image/shapes/mark_white.svg",
+            "image": "image/screenshots/chart-iq.png"
+        },
+        {
+            "name": "Salesforce",
+            "title": "Salesforce",
+            "manifest": "https://cdn.openfin.co/demos/salesforce/app.json",
+            "description": "Salesforce",
+            "icon": "image/shapes/salesforce.svg",
+            "image": "image/screenshots/template-app.png"
+        },
+        {
+            "name": "Adaptable",
+            "title": "Adaptable",
+            "manifest": "http://beta.adaptableblotter.com/app-beta.json",
+            "description":
+                "The Adaptable Blotter is the fastest fully-featured HTML5 grid available on the market. It ships, out of the box, with all the powerful, advanced functionality that financial users need. It is suitable for any type of grid, can be populated with any data, and used anywhere in any organisation. AdaptableBlotter.JS integrates with the leading HTML5 grid controls providing a single set of screens and functionality regardless of the underlying grid. In this demo AdaptableBlotter.JS sits on top of OpenFin’s super-fast canvas based Hypergrid – a particularly powerful combination.",
+            "icon": "image/shapes/adaptable-blotter-logo.png",
+            "image": "image/screenshots/adaptable.png"
+        },
+        {
+            "name": "Pipeline-Deals",
+            "title": "Pipeline Deals",
+            "manifest": "https://cdn.openfin.co/demos/whiteboard/apps/internal/pipeline/app.json",
+            "description":
+                "Customer relationship management and sales CRM software to organize, track, and manage your deals, leads, and contacts. Great for sales teams of all sizes.",
+            "icon":
+                "https://d33wubrfki0l68.cloudfront.net/29601600ed621a6d34af5c049a8c51f8c4bf9030/2002f/images/sales-tools-logos/logo-36-pipelinedeals.png",
+            "image":
+                "https://help.pipelinedeals.com/hc/en-us/article_attachments/202278837/Deals___PipelineDeals.png"
+        },
+        {
+            "name": "Reactive Trader",
+            "title": "Reactive Trader",
+            "manifest":
+                "https://raw.githubusercontent.com/AdaptiveConsulting/ReactiveTraderCloud/master/src/client/config/openfin/demo.app.json",
+            "description":
+                "Adaptive has developed Reactive Trader, a simulated trading application for FX markets. Pop out FX currency pair tiles from the main window and move it to a location where it remains on top of your monitor in front of other apps. Click on a Buy/Sell stack to execute a trade and generate a toaster notification with the transaction details. Reactive Trader also integrates with Excel.",
+            "icon": "https://web-demo.adaptivecluster.com/images/icon.ico",
+            "image": "image/screenshots/reactive-trader.png"
+        },
+        {
+            "name": "StockFlux",
+            "title": "StockFlux",
+            "manifest":
+                "http://scottlogic.github.io/StockFlux/master/app.json",
+            "description":
+                "The StockFlux OpenFin demo, by Scott Logic, is an application that allows you to explore the price and performance of various stocks via a novel desktop interface. You can open multiple windows by dragging tiles outside of the favourites pane, re-dock by dragging them back in, ‘collapse’ a window to create a compact tile view and re-open recently closed windows in their original state.",
+            "icon": "http://scottlogic.github.io/StockFlux/master/favicon.ico",
+            "image": "image/screenshots/stock-flux.jpg"
+        },
+        {
+            "name": "Hyperblotter",
+            "title": "Hyperblotter",
+            "manifest": "http://cdn.openfin.co/demos/hyperblotter/app.json",
+            "description":
+                "The Hyperblotter demonstrates OpenFin’s ability to manage native window events in an HTML5 world and Excel integration. The application allows users to create multiple windows, animate those windows, launch a Hypergrid blotter and port data into Excel by highlighting the table.",
+            "icon": "image/shapes/hyperblotter_icon.ico",
+            "image": "image/screenshots/hyperblotter.png"
+        },
+        {
+            "name": "Lithos",
+            "title": "Lithos",
+            "manifest": "https://projects.28stone.com/lvm-client/app.json",
+            "description":
+                "28Stone's Lithos Volume Matchings is a fixed price, session based matching platform with the ability to simultaneously process multiple matching sessions initiated by a variety of Brokers. The platform enables order entry either directly through the session specific UI or via a client side integrated Excel spreadsheet. Utilizing OpenFin’s API the Lithos’s windows are dockable to provide a single window.",
+            "icon": "image/shapes/28stone.png",
+            "image": "image/screenshots/lithos.png"
+        },
+        {
+            "name": "My Symphony",
+            "title": "My Symphony",
+            "manifest":
+                "https://symphony.openfin.co/app?startup_app.url=https://my.symphony.com",
+            "description":
+                "OpenFin has created an open-source project that allows anyone to run the Symphony chat client on OpenFin. This moves the client into a secure, interoperable and deployable format that can be more conducive for enterprises that already leverage OpenFin for their own applications.",
+            "icon": "image/shapes/symphony.svg",
+            "image": "image/screenshots/symphony.png"
+        },
+        {
+            "name": "Beacon",
+            "title": "Beacon",
+            "manifest": "http://perpetualnyc.com/beacon/app.json",
+            "description":
+                "Beacon, by Perpetual, is a scrolling news application built on OpenFin. Beacon provides live updating news from 50 different news sources including CNBC, Reuters and The New York Times. You can search for keywords across thousands of news articles, select news sources and bookmark specific articles, giving you immediate and convenient access to financial news directly on your desktop.",
+            "icon": "http://perpetualnyc.com/beacon/beacon_icon.ico",
+            "image": "image/screenshots/beacon.png"
+        },
+        {
+            "name": "Web Portal",
+            "title": "Web Portal",
+            "manifest": "https://cdn.openfin.co/demos/whiteboard/apps/internal/web-portal/app.json",
+            "description":"",
+            "icon": "https://cdn2.iconfinder.com/data/icons/business-office-icons/256/Global_Business-512.png",
+            "image": "image/screenshots/beacon.png"
+        },
+        {
+            "name": "RSRCXChange",
+            "title": "RSRCXChange",
+            "manifest": "https://www.rsrchx.com/api/openfin/1/rex.main.app.json",
+            "description":
+                "",
+            "icon": "https://www.rsrchx.com/static/openfin/rex.app.ico",
+            "image": ""
+        },
+        {
+            "name": "FDC3 Explorer",
+            "title": "FDC3 Explorer",
+            "manifest": "https://cdn.openfin.co/demos/whiteboard/apps/external/fdc3explorer/explorer/app.json",
+            "description": "",
+            "icon": "https://cdn.openfin.co/demos/whiteboard/apps/external/fdc3explorer/shared/fdc3fav.png",
+            "image": ""
+        }
+    ]
+}
