@@ -69,7 +69,7 @@ export class ContentManager {
 
         //if no search then render original list and escape.
         if(searchQuery.length === 0) {
-            this._renderAppList(this._trayApps, false, true);
+            this._renderAppList(this._trayApps, true);
             return;
         }
 
@@ -83,7 +83,7 @@ export class ContentManager {
             return false;
         });
 
-        this._renderAppList(searchedApps, false, true);
+        this._renderAppList(searchedApps, true);
     }
 
     /**
@@ -201,8 +201,9 @@ export class ContentManager {
         });
 
         if(this._hasRenderedOnce){
-            this._renderAppList(appClassed, false);
+            this._renderAppList(appClassed);
         } else {
+            this._renderHotBar(appClassed);
             this._renderAppList(appClassed);
             this._hasRenderedOnce = true;
         }
@@ -220,50 +221,61 @@ export class ContentManager {
     }
 
     /**
+     * @method _renderHotBar Renders the Hotbar Apps.
+     * @param apps Array of Applications
+     * @param clearExistingIcons Remove any existing Icons
+     */
+    private _renderHotBar(apps: App[], clearExistingIcons: boolean = false): void {
+        // Trusting #app-hotbar is not null
+        const hotBar: HTMLElement = document.getElementById("app-hotbar")!;
+
+        // Gets any apps on the HotBar from previous application uses.
+        const rememberedHotApps: Array<{name: string}> = JSON.parse(localStorage.getItem('HotApps') as string) || [];
+
+        if(hotBar) {
+
+            // Render each applications HTML
+            apps.forEach((app: App, index: number) => {
+
+                // Loads first 5 apps in list if there are no rememeberedApps, or loads the rememeberedApps.
+                if( ((index < 5 && rememberedHotApps.length === 0) || rememberedHotApps.length > 0) ) {
+                    
+                    // Pluck out and renders the remembered apps
+                    if (rememberedHotApps.length > 0) {
+                        const found: number = rememberedHotApps.findIndex((rememberedApp: {name: string}) => {
+                            return app.info.name === rememberedApp.name;
+                        });
+
+                        if(found > -1) {
+                            this._renderTo(hotBar, app.render());
+                        }
+                    } else {
+                        // No rememberedApps
+                        this._renderTo(hotBar, app.render());
+                    }
+                }
+            });
+        }
+    }
+
+    /**
      * @method _renderAppList Renders Application from an array of applications.
      * @param apps Array of Applications
      * @param renderHotBar Boolean if we should consider the top bar items or render only to the tray.
      */
-    private _renderAppList(apps: App[], renderHotBar: boolean = true, clearExistingIcons: boolean = false): void {
-         // Trusting .app-list is not null
-         const trayElement: HTMLElement = document.getElementsByClassName("app-list")![0] as HTMLElement;
+    private _renderAppList(apps: App[], clearExistingIcons: boolean = false): void {
+        // Trusting .app-list is not null
+        const trayElement: HTMLElement = document.getElementsByClassName("app-list")![0] as HTMLElement;
 
-         // Trusting #app-hotbar is not null
-         const hotBar: HTMLElement = document.getElementById("app-hotbar")!;
-         let rememberedHotApps: Array<{name: string}> = [];
+        if(clearExistingIcons){
+            trayElement.innerHTML = "";
+        }
 
-         if(clearExistingIcons){
-             trayElement.innerHTML = "";
-         }
-
-         if(renderHotBar) {
-            rememberedHotApps = JSON.parse(localStorage.getItem('HotApps') as string) || [];
-         }
-         
-        // Render each applications HTML
-        apps.forEach((app: App, index: number) => {
-            // 5 Items in the launcher bar
-            if( ((index < 5 && rememberedHotApps.length === 0) || rememberedHotApps.length > 0) && renderHotBar && hotBar) {
-                
-                if (rememberedHotApps.length > 0) {
-                    const found: number = rememberedHotApps.findIndex((rememberedApp: {name: string}) => {
-                        return app.info.name === rememberedApp.name;
-                    });
-
-                    if(found > -1) {
-                        this._renderTo(hotBar, app.render());
-                    }
-                } else {
-                    this._renderTo(hotBar, app.render());
-                }
-            }
-
-           if(trayElement) {
-               this._renderTo(trayElement, app.render());
-           }
-
-        });
-
+        if(trayElement) {
+            apps.forEach((app: App, index: number) => {
+                this._renderTo(trayElement, app.render());
+            });
+        }
     }
 
     /**
@@ -274,9 +286,6 @@ export class ContentManager {
     private _renderTo(toElement: HTMLElement, renderElement: HTMLElement): void {
         toElement.appendChild(renderElement);
     }
-
-
-
 
     /**
      * @method getTrayApps Returns an Array of items from Tray
