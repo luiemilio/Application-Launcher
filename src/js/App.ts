@@ -1,4 +1,5 @@
 import { AppInfo, ContentManager } from "./ContentManager";
+import Tooltip from 'tooltip.js';
 
 /**
  * @class App Handles individual Application functionality
@@ -13,7 +14,7 @@ export class App {
   /**
    * @method render Returns HTMLElement for this application
    */
-  render(): HTMLElement {
+  render(hotbar: boolean = false): HTMLElement {
     // Creates <div class="app-square"></div>
     const appSquare: HTMLElement = document.createElement("div");
     appSquare.className = "app-square";
@@ -42,8 +43,37 @@ export class App {
 
     // Creates onclick event for the appSquare to launch application
     appSquare.onclick = (): void => {
-      ContentManager.createFromManifestAndRun(this._appInfo.manifest);
+      ContentManager.createFromManifestAndRun(this._appInfo.manifest_url);
     };
+
+    // Adds a tooltip object to appContent
+    if (!hotbar) {
+      const toolTip = new Tooltip(appContent, {
+        // Will default to right of the object, unless the window is to narrow to fit
+        placement: 'right-start',
+        // Tooltip is rendered in the body, so as to not mess with the other elements
+        container: document.body,
+        delay: { show: 500, hide: 50 },
+        title: this._appInfo.title,
+        template: `
+        <div class="tooltip" role="tooltip">
+            <div class="tooltip-arrow">
+            </div>
+            <div class="tooltip-inner">
+            </div>
+            <div class="tooltip-description">
+                <p> 
+                  ${this._appInfo.description}
+                </p>
+            </div>
+            <div class="tooltip-images">
+              ${this._appInfo.images.map((img) => {
+            return `<img src="${img.url}" width="170">`;
+          }).join('\n')}
+            </div>
+        </div>`
+      });
+    }
 
     return appSquare;
 
@@ -63,4 +93,5 @@ export class App {
   public get info(): AppInfo {
     return this._appInfo;
   }
+
 }

@@ -1,5 +1,6 @@
 
 import dragula from 'dragula';
+import { WindowManager } from './WindowManager';
 
 const MAX_CHILD_COUNT = 5;
 
@@ -36,12 +37,12 @@ export class DragDropManager {
                 this._appHotBar,
             ],
             // Determines when the dragged object is copied vs moved
-            copy: (el, source) => {
+            copy: (el, source):boolean => {
                 // All drags originating from the app library are copied
                 return source === this._appList;
             },
             // Determines when a container will accept a drop
-            accepts: (el, target, source) => {
+            accepts: (el, target, source):boolean => {
                 // Not allowed to add anything to the main list
                 if (target === this._appList) {
                     return false;
@@ -58,6 +59,11 @@ export class DragDropManager {
                 
                 return this._hotBarChildCount < MAX_CHILD_COUNT;
 
+            },
+
+            invalid: (el, handle):boolean => {
+                
+                return !WindowManager.instance.isTrayOpen;
             },
             // If the object is dropped where there is no valid 
             // position, it is removed (e.g. off window)
