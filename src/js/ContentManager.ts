@@ -230,7 +230,7 @@ export class ContentManager {
 
          // Trusting #app-hotbar is not null
          const hotBar: HTMLElement = document.getElementById("app-hotbar")!;
-         let rememberedHotApps: Array<{name: string}>;
+         let rememberedHotApps: Array<{name: string}> = [];
 
          if(clearExistingIcons){
              trayElement.innerHTML = "";
