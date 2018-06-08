@@ -1,0 +1,18 @@
+{
+    "style": {
+        "windowTitle": "Application Launcher",
+        "systemTrayIcon": "image/configurables/logo-new.ico",
+        "icon": "image/configurables/logo-new.png",
+        "iconBackground": "url('image/configurables/gradient.svg')",
+        "iconHover": "#0E00A0",
+        "hotbarBackground": "#1F1E24",
+        "listBackground": "#1F1E24",
+        "listAppHover": "#484c6c",
+        "listAppTextColor": "#FFFFFF",
+        "searchBarBackground": "rgba(255, 255, 255, 0.15)",
+        "searchBarTextColor": "lightgrey",
+        "toolTipBackground": "rgb(60, 63, 88)",
+        "toolTipTextColor": "white"
+    },
+    "applicationManifests": ["./config/application-manifest.json", "https://app-directory.openfin.co/api/v1/apps/"]
+}

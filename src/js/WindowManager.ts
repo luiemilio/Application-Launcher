@@ -1,5 +1,6 @@
 import * as openfinLayouts from 'openfin-layouts';
 import { ContentManager } from './ContentManager';
+import { TrayWindowManager } from './TrayWindowManager';
 
 /**
  * @class WindowManager Handles all Window Related Functionality
@@ -19,6 +20,13 @@ export class WindowManager {
         this.setWindowDefaults();
 
         WindowManager.INSTANCE = this;
+
+        /* 
+         * Sets _isTrayOpen based on the window height
+         * (This needs to be here to stop drag and drop breaking when 
+         * the window is reloaded while the tray is expanded)
+         */
+        this._isTrayOpen = (window.innerHeight > 67 ? true : false);
     }
 
     /**
@@ -36,6 +44,20 @@ export class WindowManager {
         // @ts-ignore openfin type incorrectly handling windowResized param
         this._window.addEventListener('bounds-changed', this.windowResized.bind(this));
         this._window.addEventListener('close-requested', this.handleWindowClose.bind(this));
+        this._window.getNativeWindow().addEventListener('beforeunload', this.handleUnload.bind(this));
+    }
+
+    /**
+     * @method handleUnload Fires before the DOM is unloaded. 
+     * Removes the current tray icon, then allows the reload to continue
+     */
+    private async handleUnload() {
+        const trayWindowManager = TrayWindowManager.instance;
+        console.log('Reload requested - destroying tray window');
+        
+        await trayWindowManager.destroyTrayWindow();
+        console.log('Tray window destoyed - proceeding with reload');
+        return;
     }
 
     /**

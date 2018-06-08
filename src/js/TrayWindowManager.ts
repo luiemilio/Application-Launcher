@@ -22,7 +22,7 @@ export class TrayWindowManager {
     /**
      * @method _createTrayWindow Creates the tray menu window
      */
-    private _createTrayWindow(): void {        
+    private _createTrayWindow(): void {
         this._window = new fin.desktop.Window({
             'name': 'LauncherTray',
             'url': 'tray.html',
@@ -67,6 +67,41 @@ export class TrayWindowManager {
         }
     }
 
+    /**
+     * @method destroyTrayWindow Removes the current tray icon
+     * Intended to be called when unloading the main window to
+     * ensure errant tray icons are not left around.
+     */
+    public async destroyTrayWindow(): Promise<void[]> {
+
+        // Resolves if there is no tray window to begin with
+        // or once it has closed
+        const closeTray: Promise<void> = new Promise<void>((resolve, reject) => {
+            console.log('Attempting to close tray window: ', this._window);
+            if (this._window) {
+                this._window.close(true, () => {
+                    console.log('Tray window closed');
+                    resolve();
+                }, () => {
+                    console.log('Failed to close window');
+                    resolve();
+                });
+            }
+            console.log('Tray window already closed - proceeding anyway');
+            resolve();
+        });
+
+        // Resolves once the current tray icon has been removed from the app
+        const removeIcon: Promise<void> = new Promise<void>((resolve, reject) => {
+            console.log('Attempting to remove tray icon');
+            fin.desktop.Application.getCurrent().removeTrayIcon(() => {
+                console.log('Tray icon removed');
+                resolve();
+            });
+        });
+
+        return Promise.all([closeTray, removeIcon]);
+    }
 
     /**
      * @method updateTrayIcon Updates Tray Icon
@@ -81,7 +116,7 @@ export class TrayWindowManager {
      * @method instance Returns the TrayWindowManager INSTANCE
      */
     public static get instance(): TrayWindowManager {
-        if(TrayWindowManager.INSTANCE){
+        if(TrayWindowManager.INSTANCE) {
             return TrayWindowManager.INSTANCE;
         } else {
             return new TrayWindowManager();

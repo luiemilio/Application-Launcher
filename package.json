@@ -8,7 +8,6 @@
     "concurrently": "^3.5.1",
     "copy-dir": "^0.3.0",
     "css-loader": "^0.28.10",
-    "dragula": "^3.7.2",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.9",
@@ -28,10 +27,12 @@
     "webpack-cli": "^2.0.13"
   },
   "dependencies": {
-    "rsyncwrapper": "^2.0.1"
+    "popper.js": "^1.14.3",
+    "tooltip.js": "^1.2.0",
+    "dragula": "^3.7.2"
   },
   "scripts": {
-    "build": "node build.js && webpack",
+    "build": "webpack && node build.js",
     "webpack": "webpack --watch",
     "lint": "gts check",
     "start": "concurrently --kill-others \"webpack --mode development --watch\" \"sleep 5 && node server.js\"",

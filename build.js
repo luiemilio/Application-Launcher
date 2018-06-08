@@ -12,7 +12,7 @@ copydir.sync('src/', 'dist/', function(stat, filepath, filename){
       return false;
     }
 
-    if(stat === 'file' && path.extname(filepath) === '.ts') {
+    if(stat === 'file' && path.extname(filepath) === '.ts' && !filepath.includes("dist")) {
         return false;
     }
 
