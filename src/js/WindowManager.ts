@@ -12,6 +12,11 @@ export class WindowManager {
     private _window: fin.OpenFinWindow = fin.desktop.Window.getCurrent();
     private _isTrayOpen: boolean = false;
 
+    /**
+     * @member _hotBarHeight The height of the hotbar when minimized.  Rounded up to the nearest 10th.  Real value is 67. 70 Used due to bug.
+     */
+    private readonly _hotBarHeight: number = 70;
+
     constructor() {
         if(WindowManager.INSTANCE) {
             return WindowManager.INSTANCE;
@@ -26,7 +31,7 @@ export class WindowManager {
          * (This needs to be here to stop drag and drop breaking when 
          * the window is reloaded while the tray is expanded)
          */
-        this._isTrayOpen = (window.innerHeight > 67 ? true : false);
+        this._isTrayOpen = (window.innerHeight > this._hotBarHeight ? true : false);
     }
 
     /**
@@ -53,10 +58,9 @@ export class WindowManager {
      */
     private async handleUnload() {
         const trayWindowManager = TrayWindowManager.instance;
-        console.log('Reload requested - destroying tray window');
         
         await trayWindowManager.destroyTrayWindow();
-        console.log('Tray window destoyed - proceeding with reload');
+
         return;
     }
 
@@ -73,7 +77,7 @@ export class WindowManager {
      * @param e fin.WindowsBoundsEvent
      */
     private windowResized(e: fin.WindowBoundsEvent): void {
-        this._isTrayOpen = (e.height > 67 ? true : false);
+        this._isTrayOpen = (e.height > this._hotBarHeight ? true : false);
     }
 
     /**
