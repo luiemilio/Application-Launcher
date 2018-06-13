@@ -10,7 +10,6 @@ The Openfin Application Launcher provides a central and customizable launcher ex
 * Customizable Look and Feel
 * Supports Custom Application Manifests from local and remote environments.
 * Searchable Application Directory
-* ...
 
 # Launch
 
@@ -48,7 +47,7 @@ The settings manifest can be found under `./src/config/settings.json`.  Here you
         "toolTipBackground": string - Background for the tooltip. Can be hex color string or url/path.  See CSS notes below.
         "toolTipTextColor": string - Color of the text within the tooltip.
     },
-    "applicationManifests": string[] - An array of urls pointing to your application manifests.
+    "applicationMetadata": string[] - An array of urls pointing to your application metadata stores.
 }
 ```
 
@@ -60,35 +59,22 @@ Anything denoted with a CSS Note can have a valid CSS property:
 url('someimage.png') | "blue" | "#FFFFFF"
 ```
 
-# Application Manifest
+# Application Metadata
 
-The application manifest contains an array of various settings about your applications.  The application manifest can be found under `./src/config/application-manifest/`.  The manifest takes the following shape:
+The application metadata file contains an array of various settings about your applications.  An example metadata file can be found under `./src/config/application-metadata/`. The file takes the following shape:
 
 ```
 [
     {
     "name": string - Name of your application.
     "title": string - Title of your application.  Used in the app list.
-    "manifest_url": string - Url to the applications manifest file.
+    "manifest_url": string - Url to the application's manifest file.
     "description": string - A brief description of your application.
     "icon": string - Url to your applications icon.
     "images": [{"url": string - Url to screenshots of your application. }].
     }
 ]
 ```
-
-# Disclaimers
-
-This is an open source project and all are encouraged to contribute.
-
-# License
-
-This project has an XXX license.
-
-# Support
-
-Please enter an issue in the repo for any questions or problems
-
 # Project Structure
 
 All code lives under the src directory.
@@ -105,3 +91,13 @@ The project is built and staged to the ./dist directory.  This directory is exac
   * config/ - contains default settings.json
   * css/ - contains the project css and font.
   * image/ contains project images.
+
+## Known Issues
+## Known Issues
+* The local demo can in some cases experience issues starting if other apps have been started first on the same runtime version. It is advised to close all other openfin apps before running the demo. This is not an issue in production deployments.
+## License
+This project uses the [Apache2 license](https://www.apache.org/licenses/LICENSE-2.0)
+
+## Support
+This is an open source project and all are encouraged to contribute.
+Please enter an issue in the repo for any questions or problems. For further inqueries, please contact us at support@openfin.co

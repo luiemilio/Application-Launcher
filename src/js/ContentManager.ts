@@ -3,7 +3,7 @@ import { DragDropManager } from './DragDropManager';
 import { TrayWindowManager } from './TrayWindowManager';
 
 /**
- * @interface AppInfo Interface for the Application Info loaded from the application manifest
+ * @interface AppInfo Interface for the Application Info loaded from the application metadata file
  */
 export interface AppInfo {
     name: string;
@@ -21,7 +21,7 @@ export interface AppInfo {
  */
 interface ConfigFile {
     style?: ConfigInfo;
-    applicationManifests?: string[];
+    applicationMetadata?: string[];
 }
 
 /**
@@ -122,7 +122,7 @@ export class ContentManager {
 
     /**
      * @method _loadConfigurationFile Loads in the Configuration File and initates processing
-     * @param fileUrl Url of Manifest
+     * @param fileUrl Url of metadata
      */
     // tslint:disable-next-line:no-any
     private async _loadConfigurationFile(fileUrl: string): Promise<any> {
@@ -131,19 +131,19 @@ export class ContentManager {
     }
 
     /**
-     * @method _loadAppManifestAndProcess Loads Application Manifest and Processes
-     * @param fileUrl Url of Manifest
+     * @method _loadAppMetadataAndProcess Loads Application Metadata and Processes
+     * @param fileUrl Url of Metadata
      */
-    private _loadAppManifestAndProcess(fileUrl: string){
+    private _loadAppMetadataAndProcess(fileUrl: string){
         this._loadConfigurationFile(fileUrl)
-            .then((appManifest: AppInfo[]) => {
-                this._processAppList(appManifest);
+            .then((appMetadata: AppInfo[]) => {
+                this._processAppList(appMetadata);
             });
     }
 
     /**
      * @method _loadConfigFileAndProcess Loads Application Settings and Processes
-     * @param fileUrl Url of Manifest
+     * @param fileUrl Url of Metadata
      */
     private _loadConfigFileAndProcess(fileUrl: string): void {
         this._loadConfigurationFile(fileUrl)
@@ -152,9 +152,9 @@ export class ContentManager {
                     this._processAppConfigs(config.style);
                 }
 
-                if(config.applicationManifests){
-                    config.applicationManifests.forEach((manifest: string) => {
-                        this._loadAppManifestAndProcess(manifest);
+                if(config.applicationMetadata){
+                    config.applicationMetadata.forEach((metadata: string) => {
+                        this._loadAppMetadataAndProcess(metadata);
                     });
                 }
             });

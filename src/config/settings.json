@@ -14,5 +14,5 @@
         "toolTipBackground": "rgb(60, 63, 88)",
         "toolTipTextColor": "white"
     },
-    "applicationManifests": ["./config/application-manifest.json", "https://app-directory.openfin.co/api/v1/apps/"]
+    "applicationMetadata": ["./config/application-metadata.json", "https://app-directory.openfin.co/api/v1/apps/"]
 }
