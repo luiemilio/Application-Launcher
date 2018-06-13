@@ -93,8 +93,6 @@ The project is built and staged to the ./dist directory.  This directory is exac
   * image/ contains project images.
 
 # Known Issues
-* The local demo can in some cases experience issues starting if other apps have been started first on the same runtime version. It is advised to close all other openfin apps before running the demo. This is not an issue in production deployments.
-
 # License
 This project uses the [Apache2 license](https://www.apache.org/licenses/LICENSE-2.0)
 
