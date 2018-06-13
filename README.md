@@ -24,7 +24,7 @@ This will place the built files into the `./dist/` directory.  You can then copy
 
 # Getting Started
 
-Setting up and customizing the Openfin Application is easy.
+Setting up and customizing the Openfin Application Launcher is easy.
 
 ## Settings Manifest
 
@@ -80,7 +80,7 @@ The application metadata file contains an array of various settings about your a
 All code lives under the src directory.
 
 
-# Build
+## Build
 
 The project is built and staged to the ./dist directory.  This directory is exactly what would be deployed to the production CDN.
 
@@ -92,11 +92,12 @@ The project is built and staged to the ./dist directory.  This directory is exac
   * css/ - contains the project css and font.
   * image/ contains project images.
 
-## Known Issues
+# Known Issues
 * The local demo can in some cases experience issues starting if other apps have been started first on the same runtime version. It is advised to close all other openfin apps before running the demo. This is not an issue in production deployments.
-## License
+
+# License
 This project uses the [Apache2 license](https://www.apache.org/licenses/LICENSE-2.0)
 
-## Support
+# Support
 This is an open source project and all are encouraged to contribute.
 Please enter an issue in the repo for any questions or problems. For further inqueries, please contact us at support@openfin.co
