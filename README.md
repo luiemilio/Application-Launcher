@@ -1,9 +1,9 @@
-Openfin Application Launcher
+OpenFin Application Launcher
 =============
 
 # Overview
 
-The Openfin Application Launcher provides a central and customizable launcher experience to execute all of your Openfin Applications.  
+The Application Launcher is a reference implementation of a launch bar built on OpenFin OS. The Launcher centralizes app discovery and can be customized with your own branding.  
 
 
 ## Features
@@ -24,7 +24,7 @@ This will place the built files into the `./dist/` directory.  You can then copy
 
 # Getting Started
 
-Setting up and customizing the Openfin Application Launcher is easy.
+Setting up and customizing the OpenFin Application Launcher is easy.
 
 ## Settings Manifest
 
@@ -93,6 +93,7 @@ The project is built and staged to the ./dist directory.  This directory is exac
   * image/ contains project images.
 
 # Known Issues
+
 # License
 This project uses the [Apache2 license](https://www.apache.org/licenses/LICENSE-2.0)
 
