@@ -73,13 +73,11 @@ export class DragDropManager {
 
                 // Otherwise (moving from list to hotbar) there must be fewer
                 // than _maxChildren existing children
-                console.log(`Current children: ${this._hotBarChildCount}; Max children: ${this._maxChildren}`);
-
                 return this._hotBarChildCount < MAX_CHILD_COUNT;
             },
             // Determines when an app can not be picked up
             invalid: (el, handle): boolean => {
-                
+
                 // Block all drag and drop actions if the tray is minimized
                 return !WindowManager.instance.isTrayOpen;
             },
@@ -91,27 +89,23 @@ export class DragDropManager {
     }
 
     /** Registers listeners against the drake object to customise behaviour */
-    private _registerListeners(drake: dragula.Drake):void {
+    private _registerListeners(drake: dragula.Drake): void {
         // Increment the child counter when an app is added to the top bar
-        drake.on('drop', (el: Element, target: Element, source: Element, sibling: Element):void => {
+        drake.on('drop', (el: Element, target: Element, source: Element, sibling: Element): void => {
             if (target === this._appHotBar && source === this._appList) {
                 this._hotBarChildCount++;
-                console.log('Child count initialized to : ' + this._hotBarChildCount);
-
             }
         });
 
         // Decrement the child counter when an app is removed from the top bar
-        drake.on('remove', (el: Element, source: Element):void => {
+        drake.on('remove', (el: Element, source: Element): void => {
             if (source === this._appHotBar) {
                 this._hotBarChildCount--;
-                console.log('Child count decremented to : ' + this._hotBarChildCount);
-
             }
         });
 
         // Override default copy behavior to ensure onclick listeners are preserved
-        drake.on('cloned', (clone: HTMLDivElement, original: HTMLDivElement, type: string):void => {
+        drake.on('cloned', (clone: HTMLDivElement, original: HTMLDivElement, type: string): void => {
             if (type === 'copy') {
                 clone.onclick = original.onclick;
             }
@@ -123,10 +117,8 @@ export class DragDropManager {
      * Should be called once the app lists are fully rendered, but before any drag and drop
      * functionality is required.
      */
-    public initChildCount():void {
+    public initChildCount(): void {
         this._hotBarChildCount = document.getElementById("app-hotbar")!.childNodes.length;
-        console.log('Child count initialized to : ' + this._hotBarChildCount);
-
     }
 
 }

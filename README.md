@@ -36,7 +36,7 @@ The settings manifest can be found under `./src/config/settings.json`.  Here you
         "windowTitle": string - The title of the window.
         "icon": string - Image Url or path for the Icon found prominently on the launcher hotbar.
         "iconHover": string - Hover color of the expand tray and close buttons.  Can be hex color string or url/path.  See CSS notes below.
-        "iconBackgroundImage": string - Background for the hotbar icon. Can be hex color string or url/path.  See CSS notes below.
+        "iconBackground": string - Background for the hotbar icon. Can be hex color string or url/path.  See CSS notes below.
         "systemTrayIcon": string - Icon to be used in the system tray menu.
         "hotbarBackground": string - Background for the hotbar icon. Can be hex color string or url/path.  See CSS notes below.
         "listBackground": string -Background for the app list. Can be hex color string or url/path.  See CSS notes below.
