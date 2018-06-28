@@ -84,6 +84,8 @@ All code lives under the src directory.
 
 The project is built and staged to the ./dist directory.  This directory is exactly what would be deployed to the production CDN.
 
+You initiate the build process with the following command: `npm run build`.
+
 * dist
   * index.html - the primary index html.
   * tray.html - the tray window html.
