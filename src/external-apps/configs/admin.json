@@ -1,0 +1,17 @@
+{ 
+    "startup_app": {
+        "name": "First Data - Admin",
+        "description": "First Data - Admin",
+        "url": "http://www.devfrontend.com/firstdata/users_cards.html",
+        "defaultCentered":true,
+        "autoShow": true,
+        "uuid": "first-data-admin",
+        "saveWindowState": true,
+        "icon": "http://localhost:9001/image/configurables/logo-new.ico",
+        "applicationIcon": "http://localhost:9001/image/configurables/logo-new.ico"
+    },
+    "runtime": {
+        "arguments": "--v=1",
+        "version": "9.61.34.25"
+    }
+}
