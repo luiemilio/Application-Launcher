@@ -1,4 +1,5 @@
 { 
+    "devtools_port": 9090,
     "startup_app": {
         "name": "Launcher",
         "description": "Openfin Application Launcher",
@@ -18,7 +19,7 @@
         "applicationIcon": "http://localhost:9001/image/configurables/logo-new.ico"
     },
     "runtime": {
-        "arguments": "--winhttp-proxy-resolver --remote-debugging-port=9090 --noerrdialogs --v=1",
-        "version": "8.56.30.55"
+        "arguments": "--v=1",
+        "version": "9.61.34.25"
     }
 }
