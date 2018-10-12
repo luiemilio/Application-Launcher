@@ -8,7 +8,12 @@
         "uuid": "first-data-cards",
         "saveWindowState": true,
         "icon": "http://localhost:9001/external-apps/images/cards.png",
-        "applicationIcon": "http://localhost:9001/external-apps/images/cards.png"
+        "applicationIcon": "http://localhost:9001/external-apps/images/cards.png",
+        "preloadScripts": [
+            {
+                "url": "http://localhost:9001/external-apps/preloads/cards.js"
+            }
+        ]
     },
     "runtime": {
         "arguments": "--v=1",
