@@ -7,8 +7,8 @@
         "autoShow": true,
         "uuid": "first-data-admin",
         "saveWindowState": true,
-        "icon": "http://localhost:9001/image/configurables/logo-new.ico",
-        "applicationIcon": "http://localhost:9001/image/configurables/logo-new.ico"
+        "icon": "http://localhost:9001/external-apps/images/admin.png",
+        "applicationIcon": "http://localhost:9001/external-apps/images/admin.png"
     },
     "runtime": {
         "arguments": "--v=1",

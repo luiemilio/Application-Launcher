@@ -15,11 +15,14 @@
         "frame": false,
         "backgroundColor": "#1C1C31",
         "alwaysOnTop":true,
-        "icon": "http://localhost:9001/image/configurables/logo-new.ico",
-        "applicationIcon": "http://localhost:9001/image/configurables/logo-new.ico"
+        "icon": "http://localhost:9001/image/configurables/first-data-logo.png",
+        "applicationIcon": "http://localhost:9001/image/configurables/first-data-logo.png"
     },
     "runtime": {
         "arguments": "--v=1",
         "version": "9.61.34.25"
-    }
+    },    
+    "services" : [
+        { "name": "layouts"  }
+    ]
 }

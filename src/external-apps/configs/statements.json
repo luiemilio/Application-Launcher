@@ -1,0 +1,17 @@
+{ 
+    "startup_app": {
+        "name": "First Data - Statements",
+        "description": "First Data - Admin",
+        "url": "http://www.devfrontend.com/firstdata/statements.html",
+        "defaultCentered":true,
+        "autoShow": true,
+        "uuid": "first-data-statements",
+        "saveWindowState": true,
+        "icon": "http://localhost:9001/external-apps/images/statements.png",
+        "applicationIcon": "http://localhost:9001/external-apps/images/statements.png"
+    },
+    "runtime": {
+        "arguments": "--v=1",
+        "version": "9.61.34.25"
+    }
+}

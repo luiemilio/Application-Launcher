@@ -6,5 +6,37 @@
     "description": "First Data - Admin",
     "icon": "external-apps/images/admin.png",
     "images": []
+  },
+  {
+    "name": "Dashboard",
+    "title": "Dashboard",
+    "manifest_url": "http://localhost:9001/external-apps/configs/dashboard.json",
+    "description": "First Data - Dashboard",
+    "icon": "external-apps/images/dashboard.png",
+    "images": []
+  },
+  {
+    "name": "Cards",
+    "title": "Cards",
+    "manifest_url": "http://localhost:9001/external-apps/configs/cards.json",
+    "description": "First Data - Cards",
+    "icon": "external-apps/images/cards.png",
+    "images": []
+  },
+  {
+    "name": "Statements",
+    "title": "Statements",
+    "manifest_url": "http://localhost:9001/external-apps/configs/statements.json",
+    "description": "First Data - Statements",
+    "icon": "external-apps/images/statements.png",
+    "images": []
+  },
+  {
+    "name": "Transactions",
+    "title": "Transactions",
+    "manifest_url": "http://localhost:9001/external-apps/configs/transactions.json",
+    "description": "First Data - Transactions",
+    "icon": "external-apps/images/transactions.png",
+    "images": []
   }
 ]

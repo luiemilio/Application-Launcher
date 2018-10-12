@@ -8,9 +8,9 @@ const configPath = path.resolve("./src/app.json");
 
 //Update our config and launch openfin.
 function launchOpenFin() {
-  openfinLauncher
-    .launchOpenFin({ configPath: configPath })
-    .catch(err => console.log(err));
+    openfinLauncher
+        .launchOpenFin({ configPath: configPath })
+        .catch(err => console.log(err));
 }
 /*
 //Start the server server and launch our app.
@@ -19,9 +19,9 @@ function launchOpenFin() {
 app.use(express.static("./src"));
 
 http.createServer(app).listen(9001, () => {
-  console.log("Server Created!");
-  console.log("Starting Openfin...");
-  launchOpenFin();
+    console.log("Server Created!");
+    console.log("Starting Openfin...");
+    launchOpenFin();
 });
 
 launchOpenFin();

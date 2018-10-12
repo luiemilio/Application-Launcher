@@ -1,0 +1,17 @@
+{ 
+    "startup_app": {
+        "name": "First Data - Transactions",
+        "description": "First Data - Transactions",
+        "url": "http://www.devfrontend.com/firstdata/transactions.html",
+        "defaultCentered":true,
+        "autoShow": true,
+        "uuid": "first-data-transactions",
+        "saveWindowState": true,
+        "icon": "http://localhost:9001/external-apps/images/transactions.png",
+        "applicationIcon": "http://localhost:9001/external-apps/images/transactions.png"
+    },
+    "runtime": {
+        "arguments": "--v=1",
+        "version": "9.61.34.25"
+    }
+}
